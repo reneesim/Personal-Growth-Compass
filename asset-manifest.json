@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/personalgrowthcompass/static/css/main.f855e6bc.css",
+    "main.js": "/personalgrowthcompass/static/js/main.a2827e34.js",
+    "static/js/453.639706f0.chunk.js": "/personalgrowthcompass/static/js/453.639706f0.chunk.js",
+    "index.html": "/personalgrowthcompass/index.html",
+    "main.f855e6bc.css.map": "/personalgrowthcompass/static/css/main.f855e6bc.css.map",
+    "main.a2827e34.js.map": "/personalgrowthcompass/static/js/main.a2827e34.js.map",
+    "453.639706f0.chunk.js.map": "/personalgrowthcompass/static/js/453.639706f0.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f855e6bc.css",
+    "static/js/main.a2827e34.js"
+  ]
+}
