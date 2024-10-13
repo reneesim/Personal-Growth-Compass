@@ -1,23 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 
-const start = { image: '/images/1.svg' };
+const start = { image: `${process.env.PUBLIC_URL}/images/1.svg` };
 const questions = [
-  { image: '/images/2.svg' },
-  { image: '/images/3.svg' },
-  { image: '/images/4.svg' },
-  { image: '/images/5.svg' },
-  { image: '/images/6.svg' },
-  { image: '/images/7.svg' },
-  { image: '/images/8.svg' },
-  { image: '/images/9.svg' },
-  { image: '/images/10.svg' }
+  { image: `${process.env.PUBLIC_URL}/images/2.svg` },
+  { image: `${process.env.PUBLIC_URL}/images/3.svg` },
+  { image: `${process.env.PUBLIC_URL}/images/4.svg` },
+  { image: `${process.env.PUBLIC_URL}/images/5.svg` },
+  { image: `${process.env.PUBLIC_URL}/images/6.svg` },
+  { image: `${process.env.PUBLIC_URL}/images/7.svg` },
+  { image: `${process.env.PUBLIC_URL}/images/8.svg` },
+  { image: `${process.env.PUBLIC_URL}/images/9.svg` },
+  { image: `${process.env.PUBLIC_URL}/images/10.svg` }
 ];
 
 const end = [
-  { image: '/images/11.svg' },
-  { image: '/images/12.svg' },
-  { image: '/images/13.svg' }
+  { image: `${process.env.PUBLIC_URL}/images/11.svg` },
+  { image: `${process.env.PUBLIC_URL}/images/12.svg` },
+  { image: `${process.env.PUBLIC_URL}/images/13.svg` }
 ];
 
 const learningStyleMapping = ["Visual", "Auditory", "Reading/Writing", "Kinesthetic"];
@@ -38,28 +38,33 @@ const Quiz = () => {
   };
 
   const fetchResults = () => {
+    // Commented axios call
+    /*
     axios.get('http://localhost:8080/api/quiz/results/summary')
       .then(response => {
         const data = response.data;
         setLearningStyleOutcome(data.learningStyle);
         setWellbeingOutcome(data.wellbeingResults);
-        fetchWorkshopRecommendation('Finance', learningStyleMapping[data.learningStyle[0] - 1]); // Fetch workshop recommendation
+        fetchWorkshopRecommendation('Finance', learningStyleMapping[data.learningStyle[0] - 1]);
       })
       .catch(err => {
         setError('Error fetching results.');
       });
+    */
+    console.log("Fetch results placeholder");
   };
 
-  // Fetch workshop recommendation when learningStyleOutcome changes
   useEffect(() => {
     if (learningStyleOutcome) {
-      console.log('Learning Style Outcome:', learningStyleOutcome);  // Log the learning style outcome
+      console.log('Learning Style Outcome:', learningStyleOutcome);
       const dominantStyle = learningStyleMapping[learningStyleOutcome[0] - 1];
       fetchWorkshopRecommendation('Finance', dominantStyle);
     }
   }, [learningStyleOutcome]);
 
   const submitLearningStyleAnswer = (option) => {
+    // Commented axios call
+    /*
     axios.post('http://localhost:8080/api/quiz/answer/learning-style', { option })
       .then(() => {
         setQuestionCount(prevCount => prevCount + 1);
@@ -68,14 +73,20 @@ const Quiz = () => {
       .catch(() => {
         setError('An error occurred while submitting your answer.');
       });
+    */
+    console.log("Submit learning style answer placeholder");
+    setQuestionCount(prevCount => prevCount + 1);
+    setAnswer(null);
   };
 
   const submitWellbeingAnswer = (option) => {
+    // Commented axios call
+    /*
     axios.post('http://localhost:8080/api/quiz/answer/wellbeing', { option })
       .then(() => {
         if (questionCount === 9) {
           setQuizComplete(true);
-          fetchResults(); // Fetch both quiz results and workshop recommendation
+          fetchResults();
         } else {
           setQuestionCount(prevCount => prevCount + 1);
         }
@@ -84,6 +95,15 @@ const Quiz = () => {
       .catch(() => {
         setError('An error occurred while submitting your answer.');
       });
+    */
+    console.log("Submit wellbeing answer placeholder");
+    if (questionCount === 9) {
+      setQuizComplete(true);
+      fetchResults();
+    } else {
+      setQuestionCount(prevCount => prevCount + 1);
+    }
+    setAnswer(null);
   };
 
   const handleSubmit = () => {
@@ -115,7 +135,7 @@ const Quiz = () => {
       ...buttonPositions[index],
       backgroundColor: 'rgba(0, 162, 255, 0)',
       border: 'none',
-      color: 'transparent',  // Set font color to white
+      color: 'transparent',
       fontSize: '1rem',
       fontWeight: 'bold',
       fontFamily: 'Arial, sans-serif',
@@ -125,6 +145,8 @@ const Quiz = () => {
   };
 
   const fetchWorkshopRecommendation = (interestArea, learningStyle) => {
+    // Commented axios call
+    /*
     axios.get(`http://localhost:8080/api/quiz/recommendation?interestArea=${interestArea}&learningStyle=${learningStyle}`)
       .then(response => {
         setWorkshopRecommendation(response.data.Recommendation);
@@ -132,6 +154,8 @@ const Quiz = () => {
       .catch(err => {
         console.error('Error fetching workshop recommendation', err);
       });
+    */
+    console.log("Fetch workshop recommendation placeholder");
   };
 
   const renderQuestion = () => {
@@ -169,8 +193,8 @@ const Quiz = () => {
     return (
       <div style={{
         position: 'relative',
-        top: '-500px',  // Adjust these values to position text relative to the image
-        left: '00px',
+        top: '-500px',
+        left: '0px',
         fontSize: '20px',
         fontFamily: 'Arial, sans-serif',
         color: 'white',
@@ -200,15 +224,15 @@ const Quiz = () => {
     return (
       <div style={{
         position: 'relative',
-        top: '-650px',  // Adjust these values to position the wellbeing text correctly
+        top: '-650px',
         left: '510px',
-        fontSize: '17px',  // Adjust the font size as needed
+        fontSize: '17px',
         fontFamily: 'Arial, sans-serif',
         color: 'white',
-        width: '40vw',  // Adjust width to ensure text stays within bounds of the container
+        width: '40vw',
       }}>
         {Object.entries(wellbeingOutcome).map(([category, data], idx) => (
-          <div key={idx} style={{ marginBottom: '20px' }}>  {/* Adds some space between each category */}
+          <div key={idx} style={{ marginBottom: '20px' }}>
             <h4>{category}</h4>
             <p>Score: {data["Score"]}</p>
             <p>Recommendation: {data["Recommendation"]}</p>
